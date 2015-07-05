@@ -8,10 +8,11 @@
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
   %body
-    %header
-      = render 'shared/header'
-    %section.content.clearfix
-      = render 'shared/messages'
-      = yield
-    %footer
-      &copy 2013 MyFLiX
+    #SiteBody
+      %header
+        = render 'shared/header'
+      %section.content.clearfix
+        = render 'shared/messages'
+        = yield
+      %footer
+        &copy 2013 MyFLiX

@@ -1,1 +1,4 @@
-%h2 Hello
+.videos.row
+  - @videos.each do |video|
+    .video.col-sm-2
+      = image_tag(video.small_cover_url)
