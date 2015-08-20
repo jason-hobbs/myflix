@@ -16,4 +16,14 @@ describe Video do
     vid = Video.first
     expect(vid.category.name).to eq(video.category.name)
   end
+
+  it "does not save without a title" do
+    video = Video.create(desc: "A great video!")
+    expect(Video.count).to eq(0)
+  end
+
+  it "does not save without a description" do
+    video = Video.create(title: "Monk")
+    expect(Video.count).to eq(0)
+  end
 end
