@@ -5,29 +5,36 @@ describe Video do
   it {should validate_presence_of(:title)}
   it {should validate_presence_of(:desc)}
 
-#  it "saves itself" do
-#    video = Video.new(title: "Monk", desc: "A great video!")
-#    video.save
-#    expect(Video.first).to eq(video)
-#  end
+  describe "search_by_title" do
+    it "returns an empty array if there is no match" do
+      futurama = Video.create(title: "Futurama", desc: "Space Travel")
+      back_to_future = Video.create(title: "Back to Future", desc: "Time Travel")
+      expect(Video.search_by_title("hello")).to eq([])
+    end
 
-#  it "has a category" do
-#    cat = Category.new(name: "Comedy")
-#    cat.save
-#    video = Video.new(title: "Monk", desc: "A great video!")
-#    video.category = cat
-#    video.save
-#    vid = Video.first
-#    expect(vid.category.name).to eq(video.category.name)
-#  end
+    it "returns an array of one video for an exact match" do
+      futurama = Video.create(title: "Futurama", desc: "Space Travel")
+      back_to_future = Video.create(title: "Back to Future", desc: "Time Travel")
+      expect(Video.search_by_title("Futurama")).to eq([futurama])
+    end
 
-#  it "does not save without a title" do
-#    video = Video.create(desc: "A great video!")
-#    expect(Video.count).to eq(0)
-#  end
+    it "returns an array of one video for a partial match" do
+      futurama = Video.create(title: "Futurama", desc: "Space Travel")
+      back_to_future = Video.create(title: "Back to Future", desc: "Time Travel")
+      expect(Video.search_by_title("urama")).to eq([futurama])
+    end
 
-#  it "does not save without a description" do
-#    video = Video.create(title: "Monk")
-#    expect(Video.count).to eq(0)
-#  end
+    it "returns an array of all matches ordered by created_at" do
+      futurama = Video.create(title: "Futurama", desc: "Space Travel", created_at: 1.day.ago)
+      back_to_future = Video.create(title: "Back to Future", desc: "Time Travel")
+      expect(Video.search_by_title("Futur")).to eq([back_to_future, futurama])
+    end
+
+    it "returns an empty array for a search with an empty string" do
+      futurama = Video.create(title: "Futurama", desc: "Space Travel", created_at: 1.day.ago)
+      back_to_future = Video.create(title: "Back to Future", desc: "Time Travel")
+      expect(Video.search_by_title("")).to eq([])
+    end
+  end
+
 end
