@@ -27,9 +27,11 @@ fieldset.actions {
   border: 1px solid #fff;
   box-shadow: none;
   border-radius: 5px;
-  color: #fff;
+  color: #000;
   margin-right: 5px;
-  vertical-align: middle;
+  margin-left: 5px;
+  position: relative;
+  top: 5px;
 }
 
 .search-query ::-webkit-input-placeholder, .search-input :-moz-placeholder, .search-input ::-moz-placeholder, .search-input :-ms-input-placeholder {
