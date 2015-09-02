@@ -2,6 +2,6 @@
   - @categories.each do |cat|
     .col-sm-12.vcenter
       %span{:style => "font-size: 2em !important"}= cat.name
-    - cat.videos.each do |video|
+    - cat.recent_videos.each do |video|
       .video.col-sm-2
         = link_to(image_tag(video.small_cover_url), video_path(video))
