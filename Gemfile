@@ -26,8 +26,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :production do
